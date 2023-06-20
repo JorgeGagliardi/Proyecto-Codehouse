@@ -36,7 +36,7 @@ header {
   font-family: "CarterOne-Regular", cursive; /* Fuente almacenada en forma local */
   font-size: 20px;
   font-weight: bold;
-  background-color: darkgreen;
+  background-image: radial-gradient(circle, #006400, #00CC00);
   border-radius: 10px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -45,8 +45,8 @@ header {
   color: white;
 }
 .boton:hover {
-  background-color: #8fbc8f;
-  color: gray;
+  background-image: radial-gradient(circle, #00CC00, #006400);
+  color: #dfd9d9;
 }
 
 .boton__ubicacion {
@@ -59,7 +59,7 @@ header {
   font-family: "CarterOne-Regular", cursive; /* Fuente almacenada en forma local */
   font-size: 20px;
   font-weight: bold;
-  background-color: darkgreen;
+  background-color: #006400;
   border-radius: 10px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -169,10 +169,23 @@ header {
   height: 300px;
 }
 
+.fotoCultivando {
+  width: 317px;
+  height: 317px;
+  background-color: #006400;
+  border: 1px;
+  border-radius: 20px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  text-align: center;
+  padding: 2px;
+  color: white;
+}
+
 .fotoJardines {
   width: 317px;
   height: 317px;
-  background-color: darkgreen;
+  background-color: #006400;
   border: 1px;
   border-radius: 20px;
   margin-top: 0px;
@@ -182,14 +195,13 @@ header {
   color: white;
 }
 .fotoJardines:hover {
-  width: 350px;
-  height: 350px;
+  transform: scale(1.1, 1.05);
 }
 
 .fotoJardines__Ubicacion {
   width: 317px;
   height: 317px;
-  background-color: darkgreen;
+  background-color: #006400;
   border: 1px;
   border-radius: 20px;
   margin-top: 0px;
@@ -202,7 +214,7 @@ header {
 .fotoPlantas {
   width: 170px;
   height: 170px;
-  background-color: darkgreen;
+  background-color: #006400;
   border: 1px;
   border-radius: 20px;
   margin-top: 0px;
@@ -291,7 +303,7 @@ header {
 .videoJardines {
   width: 400px;
   height: 230px;
-  background-color: darkgreen;
+  background-color: #006400;
   border: 1px;
   border-radius: 20px;
   margin-top: 0px;
@@ -308,7 +320,7 @@ header {
 .videoJardines__Ubicacion {
   width: 400px;
   height: 230px;
-  background-color: darkgreen;
+  background-color: #006400;
   border: 1px;
   border-radius: 20px;
   margin-top: 0px;
