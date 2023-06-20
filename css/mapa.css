@@ -1,0 +1,33 @@
+.contenedorJardin__Ubicacion {
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    justify-content:space-evenly;
+    align-items: center;
+}
+@media (min-width:800px){
+    .fotoJardines__Ubicacion {
+    height: 400px;
+    width: 500px;
+    }
+    #map {
+        height: 400px;
+        width: 500px;
+        border: solid 2px;
+        border-radius: 20px;
+        border-color: darkgreen;
+    }
+}
+@media (max-width:799px){
+    .fotoJardines__Ubicacion {
+    height: 400px;
+    width: 500px;
+    }
+    #map {
+        height: 240px;
+        width: 317px;
+        border: solid 2px;
+        border-radius: 20px;
+        border-color: darkgreen;
+    }
+}

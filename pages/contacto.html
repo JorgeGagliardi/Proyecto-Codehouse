@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="sp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="espacioJardin.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <title>Espacio Jardin</title>
+</head>
+<body>
+    <div class="contenedorGrilla__Contacto">
+        <header>
+            <img class="logo" src="Imagenes/logo.jpg" alt="Logo Espacio Jardin" />  <!-- Logo y título principal -->
+            <h1 class="logo__titulo">ESPACIO JARDÍN</h1>
+        </header>
+        <nav>
+            <div class="menuMobile">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Temas de interés
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="nuestrasPlantas.html">Nuestras plantas</a></li>
+                        <li><a class="dropdown-item" href="jardines.html">Jardines</a></li>
+                        <li><a class="dropdown-item" href="cultivando.html">Cultivando</a></li>
+                        <li><a class="dropdown-item" href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="menuDesktop">
+                <a href="nuestrasPlantas.html"><p class="boton">NUESTRAS PLANTAS</p></a> <!-- Menú -->
+                <a href="jardines.html"><p class="boton">JARDINES</p></a>                <!-- Menú -->
+                <a href="cultivando.html"><p class="boton">CULTIVANDO</p></a>            <!-- Menú -->
+                <a href="contacto.html"><p class="boton">CONTACTO</p></a>                <!-- Menú -->
+            </div>
+        </nav>
+        <div class="contenedorTituloPagina">
+            <h2 class="tituloPagina__NoIndex">Contacto</h2>          <!-- Título de la página -->
+        </div>
+        <section class="contenedorMensaje__Contacto">
+            <div>
+                <h2 class="mensajeContacto">Si admirás los jardines y las plantas, si las comercializás</h2>
+                <h2 class="mensajeContacto">o las reproducís, envianos tus comentarios.</h2>
+            </div>
+            <div>    
+                <h2 class="mensajeContacto">Queremos invitarte a formar parte de una comunidad</h2>
+                <h2 class="mensajeContacto">apasionada por estos temas.</h2>
+            </div>
+        </section>
+        <section class="contenedorMensaje__Contacto">
+            <form action="" method="post" enctype="text/plain"> <!-- Formulario de contacto -->
+                <div class="contenedorMensaje__Contacto">       
+                    <div class="contactoFormularioNombres">
+                        <input type="text" name="apellido" placeholder="Nombre">
+                        <br><br>
+                        <input type="text" name="ciudad" placeholder="Ciudad">
+                        <br><br>
+                        <input type="text" name="pais" placeholder="Pais">
+                        <br><br>
+                        <input type="email" name="correo" placeholder="Mail">
+                        <br><br>
+                        <input type="text" name="telefono" placeholder="Teléfono">
+                    </div>
+                    <div class="contactoFormularioMensaje">
+                        <textarea placeholder="Mensaje" rows="9" cols="20"></textarea>
+                    </div>
+                </div>
+                <br>
+                <div class="contenedorBotones">           <!-- Botón ENVIAR -->
+                    <div class="contactoFormularioBotones">        
+                        <input type="submit" value="Enviar">
+                    </div>
+                    <div class="contactoFormularioBotones">       <!-- Botón LIMPIAR -->
+                        <input type="reset" value="Comenzar de nuevo">
+                    </div>
+                </div>
+            </form>
+        </section>    
+        <footer>
+            <div class="pie">
+                <p>Contacto:</p>
+                <img src="Imagenes/logoInstagram.gif" alt="Instagram" />
+                <a href="http://www.instagram.com/_espaciojardin">@_espaciojardin</a>
+                <img src="Imagenes/mail.gif" alt="Mail" />
+                <a href="contacto.html">info@espaciojardin.ar</a>
+            </div>
+        </footer>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

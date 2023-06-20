@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="sp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="espacioJardin.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <title>Espacio Jardin</title>
+</head>
+<body>
+    <div class="contenedorGrilla__NoIndex">
+        <header>
+            <img class="logo" src="Imagenes/logo.jpg" alt="Logo Espacio Jardin" />  <!-- Logo y título principal -->
+            <h1 class="logo__titulo">ESPACIO JARDÍN</h1>
+        </header>
+        <nav>
+            <div class="menuMobile">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Temas de interés
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="nuestrasPlantas.html">Nuestras plantas</a></li>
+                        <li><a class="dropdown-item" href="jardines.html">Jardines</a></li>
+                        <li><a class="dropdown-item" href="cultivando.html">Cultivando</a></li>
+                        <li><a class="dropdown-item" href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="menuDesktop">
+                <a href="nuestrasPlantas.html"><p class="boton">NUESTRAS PLANTAS</p></a> <!-- Menú -->
+                <a href="jardines.html"><p class="boton">JARDINES</p></a>                <!-- Menú -->
+                <a href="cultivando.html"><p class="boton">CULTIVANDO</p></a>            <!-- Menú -->
+                <a href="contacto.html"><p class="boton">CONTACTO</p></a>                <!-- Menú -->
+            </div>
+        </nav>
+        <div class="contenedorTituloPagina">
+            <h2 class="tituloPagina__NoIndex">Jardines</h2>          <!-- Título de la página -->
+        </div>
+        <section class="contenedorFotoPlantas">                          <!-- Fotos de jardines con su ubicación -->
+            <article class="contenedorFotoPlantas_Art">
+                <a href="jardinDeColibries.html" target="_self">
+                <img class="fotoJardines" src="Imagenes/jardinDeColibries.jpeg" alt="Jardín de colibríes" /></a>
+                <p>Jardín de Colibries - Cariló</p>
+                <a href="jardinDeColibries.html" target="_self"><p class="boton__ubicacion">Ver ubicación</p></a>
+            </article>
+            <article class="contenedorFotoPlantas_Art">
+                <a href="jardinElRosedal.html" target="_self">
+                <img class="fotoJardines" src="Imagenes/elRosedal.jpeg" alt="El Rosedal" /></a>
+                <p>El Rosedal - CABA</p>
+                <a href="jardinElRosedal.html" target="_self"><p class="boton__ubicacion">Ver ubicación</p></a>
+            </article>
+            <article class="contenedorFotoPlantas_Art">
+                <a href="jardinMuseoLarreta.html" target="_self">
+                <video class="videoJardines" autoplay muted loop playsinline>
+                    <source src="Imagenes/museoLarreta.mp4"type="video/mp4">
+                </video></a>
+                <p>Museo Enrique Larreta - CABA</p>
+                <a href="jardinMuseoLarreta.html" target="_self"><p class="boton__ubicacion">Ver ubicación</p></a>
+            </article>
+        </section>
+        <footer>
+            <div class="pie">
+                <p>Contacto:</p>
+                <img src="Imagenes/logoInstagram.gif" alt="Instagram" />
+                <a href="http://www.instagram.com/_espaciojardin">@_espaciojardin</a>
+                <img src="Imagenes/mail1.gif" alt="Mail" />
+                <a href="contacto.html">info@espaciojardin.ar</a>
+            </div>
+        </footer>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
