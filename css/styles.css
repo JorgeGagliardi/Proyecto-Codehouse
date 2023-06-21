@@ -128,6 +128,12 @@ header {
   grid-template-rows: 120px 100px 430px 60px;
 }
 
+.contenedorGrilla__Galeria {
+  width: 100%;
+  display: grid;
+  grid-template-rows: 120px 100px 100px auto 20px 60px;
+}
+
 .contenedorGrilla__NoIndex {
   width: 100%;
   display: grid;
@@ -162,6 +168,11 @@ header {
   display: flex;
   justify-content: center;
   margin-top: 0px;
+}
+
+.formato_notas {
+  margin-left: 20px;
+  font-size: 16px;
 }
 
 .fotoArbolDeLuz {
@@ -222,6 +233,9 @@ header {
   text-align: center;
   padding: 2px;
   color: white;
+}
+.fotoPlantas:hover {
+  transform: scale(2, 2);
 }
 
 .logo {
