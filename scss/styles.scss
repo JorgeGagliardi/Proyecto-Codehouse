@@ -97,15 +97,15 @@ header {
     align-items:center;
     flex-wrap: wrap;
     margin-left: 50px;
+    p {
+        margin-top: 0px;
+    }
 }
 .contenedorFotoPlantas_Art {
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-.contenedorFotoPlantas p {
-    margin-top: 0px;
 }
 .contenedorGrilla {
     width: 100%;
@@ -156,9 +156,9 @@ header {
     width: 300px;
     height: 300px;
 }
-.fotoCultivando {
+.fotoCultivando, .fotoJardines__Ubicacion {
     width: 317px;
-    height: 317px;
+    height: 317px; 
     background-color:$verde_oscuro ;
     border: 1px;
     border-radius: 20px;
@@ -169,31 +169,10 @@ header {
     color: white;
 }
 .fotoJardines {
-    width: 317px;
-    height: 317px;
-    background-color:$verde_oscuro ;
-    border: 1px;
-    border-radius: 20px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    text-align:center;
-    padding: 2px;
-    color: white;
+    @extend .fotoJardines__Ubicacion;     /* uso de @extend en sass */
     &:hover {
     transform: scale(1.1,1.05);
     }
-}
-.fotoJardines__Ubicacion {
-    width: 317px;
-    height: 317px;
-    background-color: $verde_oscuro ;
-    border: 1px;
-    border-radius: 20px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    text-align:center;
-    padding: 2px;
-    color: white;
 }
 .fotoPlantas {
     width: 170px;
@@ -277,22 +256,6 @@ header {
     margin-top: 0px;
     margin-bottom: 0px;
 }
-.videoJardines {
-    width: 400px;
-    height: 230px;
-    background-color:$verde_oscuro ;
-    border: 1px;
-    border-radius: 20px;
-    margin-top: 0px;
-    margin-bottom: 5px;
-    text-align:center;
-    padding: 2px;
-    color: white;
-    &:hover{
-        width: 440px;
-        height: 253px;
-    }
-}
 .videoJardines__Ubicacion {
     width: 400px;
     height: 230px;
@@ -304,6 +267,13 @@ header {
     text-align:center;
     padding: 2px;
     color: white;
+}
+.videoJardines {
+    @extend .videoJardines__Ubicacion;     /* uso de @extend en sass */
+    &:hover{
+        width: 440px;
+        height: 253px;
+    }
 }
 @media (max-width:799px){
     footer {

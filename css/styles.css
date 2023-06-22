@@ -110,16 +110,15 @@ header {
   flex-wrap: wrap;
   margin-left: 50px;
 }
+.contenedorFotoPlantas p {
+  margin-top: 0px;
+}
 
 .contenedorFotoPlantas_Art {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.contenedorFotoPlantas p {
-  margin-top: 0px;
 }
 
 .contenedorGrilla {
@@ -180,7 +179,7 @@ header {
   height: 300px;
 }
 
-.fotoCultivando {
+.fotoCultivando, .fotoJardines__Ubicacion, .fotoJardines {
   width: 317px;
   height: 317px;
   background-color: #006400;
@@ -194,32 +193,10 @@ header {
 }
 
 .fotoJardines {
-  width: 317px;
-  height: 317px;
-  background-color: #006400;
-  border: 1px;
-  border-radius: 20px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  text-align: center;
-  padding: 2px;
-  color: white;
+  /* uso de @extend en sass */
 }
 .fotoJardines:hover {
   transform: scale(1.1, 1.05);
-}
-
-.fotoJardines__Ubicacion {
-  width: 317px;
-  height: 317px;
-  background-color: #006400;
-  border: 1px;
-  border-radius: 20px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  text-align: center;
-  padding: 2px;
-  color: white;
 }
 
 .fotoPlantas {
@@ -314,7 +291,7 @@ header {
   margin-bottom: 0px;
 }
 
-.videoJardines {
+.videoJardines__Ubicacion, .videoJardines {
   width: 400px;
   height: 230px;
   background-color: #006400;
@@ -325,23 +302,14 @@ header {
   text-align: center;
   padding: 2px;
   color: white;
+}
+
+.videoJardines {
+  /* uso de @extend en sass */
 }
 .videoJardines:hover {
   width: 440px;
   height: 253px;
-}
-
-.videoJardines__Ubicacion {
-  width: 400px;
-  height: 230px;
-  background-color: #006400;
-  border: 1px;
-  border-radius: 20px;
-  margin-top: 0px;
-  margin-bottom: 5px;
-  text-align: center;
-  padding: 2px;
-  color: white;
 }
 
 @media (max-width: 799px) {
