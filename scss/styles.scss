@@ -60,24 +60,29 @@ header {
     padding-left: 15px;
     color: white;
 }
-.contactoFormularioMensaje textarea {
-    width: 560px;
-    color:gray;
-    font-size: 20px;
+.contactoFormularioMensaje {
+    width: 500px;
     margin-top: 10px;
+    margin-left: 20px;
     margin-bottom: 0px;
 }
+.contactoFormularioMensaje textarea {
+    width: 100%;
+    color:gray;
+    font-size: 20px;
+}
 .contactoFormularioNombres {
-    width: 600px;
+    width: 500px;
     color:gray;
     margin-top: 0px;
+    margin-left: 20px;
     margin-bottom: 0px;
     justify-content: center;
     &::placeholder {
         font-size: 20px;
     }
     input {
-        width: 560px;
+        width: 500px;
         font-size: 20px;
     }
 }
@@ -86,6 +91,13 @@ header {
     flex-direction: row;
     justify-content:space-evenly;
     flex-wrap: wrap;
+}
+.contenedorFormulario__Contacto  {
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    margin-top: 50px;
+    justify-content:start;
 }
 .contenedorFoto__Inicial {
     width: 40%;
@@ -106,8 +118,12 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    p {
+        margin-top: 20px;
+    }
 }
 .contenedorGrilla {
+    height: 100vh;
     width: 100%;
     display: grid;
     grid-template-rows: 120px 100px 430px 60px;
@@ -118,6 +134,7 @@ header {
     grid-template-rows: 120px 100px 100px auto 20px 60px;
 }
 .contenedorGrilla__NoIndex {
+    height: 100vh;
     width: 100%;
     display: grid;
     grid-template-rows: 120px 100px 100px 530px 60px;
@@ -130,10 +147,10 @@ header {
 .contenedorMensaje__Contacto  {
     display: flex;
     flex-direction: row;
-    justify-content:space-between;
+    justify-content:start;
     flex-wrap:wrap;
     margin-top: 50px;
-    justify-content: center;
+    margin-left: 20px;
 }
 .contenedorMensaje__Inicial  {
     display: flex;
@@ -145,7 +162,7 @@ header {
 }
 .contenedorTituloPagina {
     display:flex;
-    justify-content: center;
+    justify-content:center;
     margin-top: 0px;
 }
 .formato_notas {
@@ -167,11 +184,14 @@ header {
     text-align:center;
     padding: 2px;
     color: white;
+    &:hover {
+        transform: scale(1.15,1.15);
+        }
 }
 .fotoJardines {
     @extend .fotoJardines__Ubicacion;     /* uso de @extend en sass */
     &:hover {
-    transform: scale(1.1,1.05);
+    transform: scale(1.15,1.15);
     }
 }
 .fotoPlantas {
@@ -270,15 +290,17 @@ header {
     text-align:center;
     padding: 2px;
     color: white;
+    &:hover{
+        transform: scale(1.2,1.2);
+    }
 }
 .videoJardines {
     @extend .videoJardines__Ubicacion;     /* uso de @extend en sass */
     &:hover{
-        width: 440px;
-        height: 253px;
+        transform: scale(1.1,1.1);
     }
 }
-@media (max-width:799px){
+@media (min-width:400px) and (max-width:799px){
     footer {
         height: 50px;
         margin-top: 5px;
@@ -290,6 +312,10 @@ header {
     .contactoFormularioBotones input {
         font-size: 10px;
     }
+    .contactoFormularioMensaje {
+        margin-left: 5px;
+        width: 240px;
+    }
     .contactoFormularioMensaje textarea {
         width: 240px;
         font-size: 20px;
@@ -298,9 +324,10 @@ header {
         font-size: 10px;
     }
     .contactoFormularioNombres {
+        margin-left: 5px;
         width: 240px;
         input {
-            width: 240px;
+            width: 100%;
         }
         &::placeholder {
             font-size: 10px;
@@ -314,10 +341,12 @@ header {
         }
     }
     .contenedorGrilla {
+        height: 100vh;
         width: 100%;
         grid-template-rows: 120px 60px auto 60px;
     }
     .contenedorGrilla__NoIndex {
+        height: 100vh;
         width: 100%;
         display: grid;
         grid-template-rows: 120px 100px 100px auto 60px;
@@ -335,6 +364,21 @@ header {
         width: 154px;
         height: 154px;
     }
+    .fotoPlantas {
+        width: 170px;
+        height: 170px;
+        background-color:$verde_oscuro ;
+        border: 1px;
+        border-radius: 20px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        text-align:center;
+        padding: 2px;
+        color: white;
+        &:hover{
+            transform: scale(1.4,1.4);
+        }
+    }
     .logo {
         width:70px; height: 70px;
     }
@@ -343,12 +387,16 @@ header {
         margin-left: 25px;
         margin-top: 40px;
     }
+    .mapaDelSitio {
+        margin-left: 20px;
+    }
     .mensajeInicial {
         font-size: 30px;
         color: black;
     }
     .mensajeContacto {
-        width: 300px;
+        width: 240px;
+        margin-left: 5px;
         font-size: 30px;
         color: black;
     }
@@ -380,4 +428,214 @@ header {
             margin-left: 10px;
         }
     }
+    .videoJardines__Ubicacion {
+        width: 300px;
+        height: 170px;
+        background-color:$verde_oscuro ;
+        border: 1px;
+        border-radius: 20px;
+        margin-top: 0px;
+        margin-bottom: 5px;
+        text-align:center;
+        padding: 2px;
+        color: white;
+        &:hover{
+            transform: scale(1.2,1.2);
+        }
+    }
+    .videoJardines {
+        @extend .videoJardines__Ubicacion;     /* uso de @extend en sass */
+        &:hover{
+            transform: scale(1.1,1.1);
+        }
+    }
+}
+@media (max-width:399.9px){
+    footer {
+        height: 50px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+    .boton {
+        font-size: 10px;
+    }
+    .contactoFormularioBotones {
+        margin-left: 10px;
+    }
+    .contactoFormularioBotones input {
+        font-size: 10px;
+    }
+    .contactoFormularioMensaje {
+        width: 200px;
+    }
+    .contactoFormularioMensaje textarea {
+        width: 200px;
+        font-size: 10px;
+    }
+    .contactoFormularioMensaje ::placeholder {
+        font-size: 10px;
+    }
+    .contactoFormularioNombres {
+        width: 200px;
+        input {
+            width: 100%;
+        }
+        &::placeholder {
+            font-size: 10px;
+        }
+    }
+    .contenedorBotones{
+        justify-content:start;
+        margin-left: 10px;
+    }
+    
+    .contenedorFotoPlantas  {
+        margin-left: 0px;
+        img {
+            width: 140px;
+            height: 140px;
+        }
+    }
+    .contenedorGrilla {
+        height: 100vh;
+        width: 100%;
+        grid-template-rows: 120px 60px auto 60px;
+    }
+    .contenedorGrilla__NoIndex {
+        height: 100vh;
+        width: 100%;
+        display: grid;
+        grid-template-rows: 120px 100px 100px auto 60px;
+    }
+    .contenedorGrilla__Contacto {
+        height: 100vh;
+        width: 100%;
+        display: grid;
+        grid-template-rows: 120px 60px 60px 30% auto 100px;
+    }
+    .contenedorMensaje__Contacto  {
+        margin-top: 20px;
+        margin-left: 1cqh;
+    }
+    .contenedorTituloPagina {
+        display:flex;
+        width: 100%;
+        flex-direction: row;
+        justify-content:space-evenly;
+        margin-top: 0px;
+    }
+    .fotoArbolDeLuz {
+        width: 120px;
+        height: 120px;
+    }
+    .fotoCultivando, .fotoJardines__Ubicacion {
+        width: 217px;
+        height: 217px; 
+        background-color:$verde_oscuro ;
+        border: 1px;
+        border-radius: 20px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        text-align:center;
+        padding: 2px;
+        color: white;
+        &:hover {
+            transform: scale(1.15,1.15);
+            }
+    }
+    .fotoJardines {
+        @extend .fotoJardines__Ubicacion;     /* uso de @extend en sass */
+        &:hover {
+        transform: scale(1.15,1.15);
+        }
+    }
+    .fotoJardines:hover {
+        width: 154px;
+        height: 154px;
+    }
+    .fotoPlantas {
+        width: 170px;
+        height: 170px;
+        background-color:$verde_oscuro ;
+        border: 1px;
+        border-radius: 20px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        text-align:center;
+        padding: 2px;
+        color: white;
+        &:hover{
+            transform: scale(1.4,1.4);
+        }
+    }
+    .logo {
+        width:70px; height: 70px;
+    }
+    .logo__titulo {
+        font-size: 16px;
+        margin-left: 25px;
+        margin-top: 40px;
+    }
+    .mapaDelSitio {
+        margin-left: 3px;
+    }
+    .mensajeInicial {
+        font-size: 30px;
+        color: black;
+    }
+    .mensajeContacto {
+        width: 240px;
+        margin-left: 5px;
+        font-size: 30px;
+        color: black;
+    }
+    .menuDesktop {
+        display: none;
+    }
+    .menuMobile {
+        display:inline-flex;
+        margin-left: 50px;
+    }
+    .pie {
+        display:flex;
+        flex-direction: row;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        a {
+            font-size: 10px;
+            margin-top: 5px;
+            margin-right: 5px;
+        }
+        img{
+            margin-top: 5px;
+            width: 15px;
+            height: 15px;
+        }
+        p {
+            font-size: 10px;
+            margin-top: 5px;
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+    }
+    .tituloPagina__NoIndex {
+    justify-content: center;
+    font-size: 36px;
+    }
+    .videoJardines {
+        width: 200px;
+        height: 115px;
+        background-color:$verde_oscuro ;
+        border: 1px;
+        border-radius: 20px;
+        margin-top: 0px;
+        margin-bottom: 5px;
+        text-align:center;
+        padding: 2px;
+        color: white;
+        &:hover{
+            transform: scale(1.2,1.2);
+        }
+    }
+
 }

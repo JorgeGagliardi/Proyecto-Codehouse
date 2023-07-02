@@ -18,7 +18,7 @@
         border-color: darkgreen;
     }
 }
-@media (max-width:799px){
+@media (min-width:400px) and (max-width:799px){
     .fotoJardines__Ubicacion {
     height: 400px;
     width: 500px;
@@ -30,4 +30,17 @@
         border-radius: 20px;
         border-color: darkgreen;
     }
+}
+@media (max-width:399.9px){
+    .fotoJardines__Ubicacion {
+        height: 217px;
+        width: 217px;
+        }
+        #map {
+            height: 180px;
+            width: 240px;
+            border: solid 2px;
+            border-radius: 20px;
+            border-color: darkgreen;
+        }
 }
