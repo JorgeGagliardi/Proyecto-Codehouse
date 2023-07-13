@@ -232,6 +232,22 @@ header {
   transform: scale(1.15, 1.15);
 }
 
+.fotoNoticias__SecretGarden {
+  width: 500;
+  height: 317px;
+  background-color: #006400;
+  border: 1px;
+  border-radius: 20px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  text-align: center;
+  padding: 2px;
+  color: white;
+}
+.fotoNoticias__SecretGarden:hover {
+  transform: scale(1.15, 1.15);
+}
+
 .fotoPlantas {
   width: 170px;
   height: 170px;
@@ -422,8 +438,8 @@ header {
     margin-left: 0px;
   }
   .contenedorFotoPlantas img {
-    width: 140px;
-    height: 140px;
+    width: 300px;
+    height: 190px;
   }
   .contenedorGrilla {
     height: 100vh;
@@ -451,6 +467,21 @@ header {
   .fotoJardines:hover {
     width: 154px;
     height: 154px;
+  }
+  .fotoNoticias__SecretGarden {
+    width: 300px;
+    height: 190px;
+    background-color: #006400;
+    border: 1px;
+    border-radius: 20px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-align: center;
+    padding: 2px;
+    color: white;
+  }
+  .fotoNoticias__SecretGarden:hover {
+    transform: scale(1.15, 1.15);
   }
   .fotoPlantas {
     width: 170px;
@@ -614,7 +645,7 @@ header {
   }
   .contenedorFotoPlantas img {
     width: 140px;
-    height: 140px;
+    height: 90px;
   }
   .contenedorGrilla {
     height: 100vh;
