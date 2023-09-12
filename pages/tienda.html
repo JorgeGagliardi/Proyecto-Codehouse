@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="sp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.css" />
+<style>
+.botonEliminar {
+    margin-left: 10px;
+}
+/* .tituloCarrito {
+    color:#006400 ;
+} */
+
+.contenedorCarrito {
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+}
+.contenedorCarrito p {
+        margin-left: 10px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+}
+.fotoCarrito {
+    width: 80px;
+    height: 80px;
+    background-color:#006400 ;
+    border: 1px;
+    border-radius: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-align:center;
+    padding: 2px;
+    color: white;
+}
+.fotoTienda {
+    width: 170px;
+    height: 170px;
+    background-color:#006400 ;
+    border: 1px;
+    border-radius: 20px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-align:center;
+    padding: 2px;
+    color: white;
+}
+</style>
+    <title>Tienda</title>
+</head>
+<body>
+    <div class="contenedorGrilla__Tienda">
+        <header>
+            <a href="../index.html" target="_self">
+            <img class="logo" src="../img/logo.jpg" alt="Logo Espacio Jardin" /></a>  <!-- Logo y título principal -->
+            <h1 class="logo__titulo">ESPACIO JARDÍN</h1>
+        </header>
+        <div class="contenedorTituloPagina">
+            <h2 class="tituloPagina__NoIndex">Tienda</h2>          <!-- Título de la página -->
+        </div>
+        <div class="contenedorTituloPagina">
+<!--             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+ -->
+                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <p><img src="../img/carrito.png" alt="Carrito" /></p></button>
+            </button>
+        </div>
+        <section id="productosAVender">                          <!-- Fotos de plantas con sus nombres -->
+
+        </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+<!--                    <h1 class="modal-title fs-5" id="exampleModalLabel">Carrito de Compras</h1>
+ -->                    <h1 class="tituloPagina__NoIndex" id="exampleModalLabel">Carrito de Compras</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="contenedor_carrito">
+                    
+                </div>
+<!--                 <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+ -->        </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="pie">
+            <p>Contacto:</p>
+            <img src="../img/logoInstagram.gif" alt="Instagram" />
+            <a href="http://www.instagram.com/_espaciojardin">@_espaciojardin</a>
+            <img src="../img/mail.gif" alt="Mail" />
+            <a href="../pages/contacto.html">info@espaciojardin.ar</a>
+            <a class="mapaDelSitio" href="../pages/sitemap.html">Mapa sitio</a>
+        </div>
+    </footer>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/tienda.js"></script>
+</body>
+</html>
