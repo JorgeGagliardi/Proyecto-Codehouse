@@ -6,12 +6,12 @@ class Producto{
         this.categoria = categoria
         this.nombre    = nombre
         this.precio    = precio
-        this.cantidad  = 1
+        this.cantidad  = "1"
         this.imagen    = imagen
     }
     descripcion(){
         return  `<article class="contenedorFotoPlantas_Art">
-        <img class="fotoTienda" src= ${this.imagen} alt="Rosa Té" />
+        <img class="fotoTienda" src= ${this.imagen} alt=" " />
         <p>${this.nombre}</p><p>$ ${this.precio}</p>
         <button class="btn btn-primary" id="ap-${this.codigo}">Añadir al carrito</button>
         </article>`
@@ -23,7 +23,7 @@ class Producto{
         return  `<article>
                     <div class="contenedorCarrito">
                         <div>
-                            <img class="fotoCarrito" src= ${this.imagen} alt="Rosa Té" /></div>
+                            <img class="fotoCarrito" src= ${this.imagen} alt=" " /></div>
                         <div>
                             <p><strong>${this.nombre}</strong></p>
                             <p>Precio:   $ ${this.precio}</p>
@@ -45,6 +45,39 @@ class Carrito{
     agregar(producto){
         this.listaDeCompras.push(producto)
     }
+
+    guardarEnStorage(){
+        let listaDeComprasJSON = JSON.stringify(this.listaDeCompras)
+        localStorage.setItem("listaDeCompras",listaDeComprasJSON)
+    }
+
+/*  El código tiene el siguiente error y desconozco como resolverlo.
+
+    Al recuperar la lista del carrito del local Storage recupera mal las
+    imágenes del producto. 
+
+    Chequeé a traves de console.log que todo había quedado bien almacenado
+    en el local Storage.
+
+    Agradezco las ayudas que me puedas dar para solucionar el problema.
+
+    Desde ya, muchas gracias.
+*/
+
+    recuperarStorage(){
+        let listaDeComprasJSON=localStorage.getItem("listaDeCompras")
+        console.log(listaDeComprasJSON)
+        let listaDeComprasJS=JSON.parse(listaDeComprasJSON)
+        console.log(listaDeComprasJS)
+        let nuevaListaDeCompras =[]
+        listaDeComprasJS.forEach(producto => {
+            let nuevoProducto = new Producto (producto.codigo, producto.categoria, producto.nombre, producto.precio, producto.cantidad, producto.imagen)
+            nuevaListaDeCompras.push(nuevoProducto)
+        })
+        this.listaDeCompras = nuevaListaDeCompras;
+        console.log(this.listaDeCompras[0])
+    }
+
     mostrar(){
         let acumuladora_descripcion = ""
         this.listaDeCompras.forEach( producto => {
@@ -116,6 +149,7 @@ class Exhibidor{
             const btn_ap = document.getElementById(`ap-${producto.codigo}`)
             btn_ap.addEventListener("click",()=>{
                 carrito.agregar(producto)
+                carrito.guardarEnStorage()
                 carrito.mostrarCarrito()
             })
         })
@@ -144,9 +178,18 @@ gondola.agregar(p5);
 
 const carrito = new Carrito();
 
-gondola.elegirProducto()
-
 let cantidadRequerida = 0;
 let productosDisponibles = "";
 filtro = "";
 lista="";
+
+carrito.recuperarStorage()
+console.log(carrito.listaDeCompras[0].codigo)
+console.log(carrito.listaDeCompras[0].categoria)
+console.log(carrito.listaDeCompras[0].nombre)
+console.log(carrito.listaDeCompras[0].precio)
+console.log(carrito.listaDeCompras[0].cantidad)
+console.log(carrito.listaDeCompras[0].imagen)
+
+carrito.mostrarCarrito()
+gondola.elegirProducto()
