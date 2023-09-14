@@ -119,6 +119,7 @@ class Carrito{
             const btn_ep = document.getElementById(`ep-${producto.codigo}`)
             btn_ep.addEventListener("click",()=>{
                 this.eliminar(producto)
+                this.guardarEnStorage()
                 this.mostrarCarrito()
             })
         })
@@ -184,12 +185,13 @@ filtro = "";
 lista="";
 
 carrito.recuperarStorage()
-console.log(carrito.listaDeCompras[0].codigo)
-console.log(carrito.listaDeCompras[0].categoria)
-console.log(carrito.listaDeCompras[0].nombre)
-console.log(carrito.listaDeCompras[0].precio)
-console.log(carrito.listaDeCompras[0].cantidad)
-console.log(carrito.listaDeCompras[0].imagen)
-
+if (carrito.listaDeCompras.length>0) {
+    console.log(carrito.listaDeCompras[0].codigo)
+    console.log(carrito.listaDeCompras[0].categoria)
+    console.log(carrito.listaDeCompras[0].nombre)
+    console.log(carrito.listaDeCompras[0].precio)
+    console.log(carrito.listaDeCompras[0].cantidad)
+    console.log(carrito.listaDeCompras[0].imagen)
+}
 carrito.mostrarCarrito()
 gondola.elegirProducto()
