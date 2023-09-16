@@ -258,9 +258,6 @@ gondola.agregar(p5);
 
 const carrito = new Carrito();
 
-let cantidadRequerida = 0;
-let productosDisponibles = "";
-filtro = "";
 lista="";
 
 carrito.recuperarStorage()
