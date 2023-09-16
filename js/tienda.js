@@ -28,7 +28,7 @@ class Producto{
                             <p><strong>${this.nombre}</strong></p>
                             <p>Precio:   $ ${this.precio}</p>
                             <p>Cantidad: ${this.cantidad}</p>
-                            <button class="btn btn-primary" id="ep-${this.codigo}">
+                            <button class="botonEliminar" id="ep-${this.codigo}">
                             <p><strong>Eliminar</strong></p>
                             </button>
                             <p>==========================</p>
@@ -137,9 +137,16 @@ class Exhibidor{
     mostrar(){
         let contenedor_productos = document.getElementById("productosAVender")
         let acumuladora_descripcion = ""
-        this.listaDeProductos.forEach( producto => {
-            acumuladora_descripcion = acumuladora_descripcion + producto.descripcion()
-        })
+        console.log(this.filtroDeProductos.length)
+        if (this.filtroDeProductos.length == 0){
+            this.listaDeProductos.forEach( producto => {
+                acumuladora_descripcion = acumuladora_descripcion + producto.descripcion()
+            })
+        } else {
+            this.filtroDeProductos.forEach( producto => {
+                acumuladora_descripcion = acumuladora_descripcion + producto.descripcion()
+            })
+        }
         return acumuladora_descripcion
     }
     elegirProducto() {
@@ -154,12 +161,84 @@ class Exhibidor{
                 carrito.mostrarCarrito()
             })
         })
+        const btn_oc = document.getElementById(`ordenCod`)
+        btn_oc.addEventListener("click",()=>{
+            this.ordenCodigo()
+            gondola.elegirProducto()
+        })
+        const btn_on = document.getElementById(`ordenNom`)
+        btn_on.addEventListener("click",()=>{
+            this.ordenDescripcion()
+            gondola.elegirProducto()
+        })
+        const btn_menpr = document.getElementById(`ordMenorPrec`)
+        btn_menpr.addEventListener("click",()=>{
+            this.ordenPrecioMasBajo()
+            gondola.elegirProducto()
+        })
+        const btn_maypr = document.getElementById(`ordMayorPrec`)
+        btn_maypr.addEventListener("click",()=>{
+            this.ordenPrecioMasAlto()
+            gondola.elegirProducto()
+        })
+        const btn_filtroPl = document.getElementById(`filtroPl`)
+        btn_filtroPl.addEventListener("click",()=>{
+            this.filtrarPlantas()
+            gondola.elegirProducto()
+        })
+        const btn_filtroAc = document.getElementById(`filtroAc`)
+        btn_filtroAc.addEventListener("click",()=>{
+            this.filtrarAccesorios()
+            gondola.elegirProducto()
+        })
+        const btn_filtroQu = document.getElementById(`filtroQu`)
+        btn_filtroQu.addEventListener("click",()=>{
+            this.quitarFiltro()
+            gondola.elegirProducto()
+        })
     }
     validaExistencia(codigo1){
         return this.listaDeProductos.some( producto => producto.codigo === codigo1)
     }
     encuentraProducto(codigo1){
         return this.listaDeProductos.find( producto => producto.codigo === codigo1)
+    }
+    ordenCodigo(){
+        if (this.filtroDeProductos.length == 0){
+            this.listaDeProductos.sort((a,b)=>a.codigo.localeCompare(b.codigo));
+        } else {
+            this.filtroDeProductos.sort((a,b)=>a.codigo.localeCompare(b.codigo));
+        }
+    }
+    ordenDescripcion(){
+        if (this.filtroDeProductos.length == 0){
+            this.listaDeProductos.sort((a,b)=>a.nombre.localeCompare(b.nombre));
+        } else {
+            this.filtroDeProductos.sort((a,b)=>a.nombre.localeCompare(b.nombre));
+        }
+    }
+    ordenPrecioMasAlto(){
+        if (this.filtroDeProductos.length == 0){
+            this.listaDeProductos.sort((a,b)=>b.precio.localeCompare(a.precio));
+        } else {
+            this.filtroDeProductos.sort((a,b)=>b.precio.localeCompare(a.precio));
+        }
+    }
+    ordenPrecioMasBajo(){
+        if (this.filtroDeProductos.length == 0){
+            this.listaDeProductos.sort((a,b)=>a.precio.localeCompare(b.precio));
+        } else {
+            this.filtroDeProductos.sort((a,b)=>a.precio.localeCompare(b.precio));
+        }
+    }
+    filtrarPlantas(){
+        this.filtroDeProductos = this.listaDeProductos.filter((el) => el.categoria == "Plantas")
+    }
+    filtrarAccesorios(){
+        this.filtroDeProductos = this.listaDeProductos.filter((el) => el.categoria == "Accesorios")
+    }
+    quitarFiltro(){
+        this.filtroDeProductos.splice(0,this.filtroDeProductos.length)       
     }
 }
 
@@ -169,7 +248,7 @@ const p1 = new Producto("1","Plantas","Sedum maceta 40cm","1200","img/sedum.jpeg
 const p2 = new Producto("2","Plantas","Madre Perla maceta 40cm","1050","img/madrePerla.jpeg");
 const p3 = new Producto("3","Plantas","Cordón de San José maceta 40cm","1100","img/cordonDeSanJose.jpeg");
 const p4 = new Producto("4","Accesorios","Rollo manguera 1/2 pulg, 25m","9000","img/rolloManguera.jpeg");
-const p5 = new Producto("5","Accesorios","Fertilizante para cesped"," 3500","img/fertilizante.jpeg");
+const p5 = new Producto("5","Accesorios","Fertilizante para cesped","3500","img/fertilizante.jpeg");
 
 gondola.agregar(p1);
 gondola.agregar(p2);
