@@ -6,15 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/bootstrap/bootstrap.css" />
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 <style>
 .botonEliminar {
     margin-left: 10px;
     color:#006400;
 }
-/* .tituloCarrito {
-    color:#006400 ;
-} */
-
 .contenedorCarrito {
     display:flex;
     flex-direction:row;
@@ -49,6 +46,11 @@
     text-align:center;
     padding: 2px;
     color: white;
+}
+.leyendaCarrito {
+    font-family: "Italianno-Regular" ;
+    color:#006400;
+    font-size: 30px;
 }
 </style>
     <title>Tienda de productos</title>
@@ -91,7 +93,7 @@
                 </ul>
             </div>
         </div>
-        <section id="productosAVender">                          <!-- Fotos de plantas con sus nombres -->
+        <section id="productosAVender">
 
         </section>
 
@@ -100,14 +102,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-<!--                    <h1 class="modal-title fs-5" id="exampleModalLabel">Carrito de Compras</h1>
- -->                    <h1 class="tituloPagina__NoIndex" id="exampleModalLabel">Carrito de Compras</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+                    <h1 class="tituloPagina__NoIndex" id="exampleModalLabel">Carrito de Compras</h1>
+<!--                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+ -->                </div>
                 <div class="modal-body" id="contenedor_carrito">
                     
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="vaciarCarrito">Vaciar carrito</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Seguir comprando</button>
                     <button type="button" class="btn btn-primary">Finalizar compra</button>
                 </div>

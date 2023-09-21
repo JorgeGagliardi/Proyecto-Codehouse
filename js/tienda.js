@@ -1,23 +1,24 @@
 // Simulación de una tienda de venta de plantas y accesorios para el jardín
 //
 class Producto{
-    constructor(codigo, categoria, nombre, precio, imagen){
+    constructor(codigo, categoria, nombre, precio, cantidad, imagen){
         this.codigo    = codigo
         this.categoria = categoria
         this.nombre    = nombre
         this.precio    = precio
-        this.cantidad  = "1"
+        this.cantidad  = cantidad
         this.imagen    = imagen
+    }
+    aumCant(){
+        this.cantidad++
     }
     descripcion(){
         return  `<article class="contenedorFotoPlantas_Art">
         <img class="fotoTienda" src= ${this.imagen} alt=" " />
         <p>${this.nombre}</p><p>$ ${this.precio}</p>
         <button class="btn btn-primary" id="ap-${this.codigo}">Añadir al carrito</button>
+        <div id="cant-${this.codigo}"></div>
         </article>`
-    }
-    descrConCantidad(){
-        return  `${this.codigo}  ${this.nombre} $ ${this.precio}  ${this.cantidad} unid.   Total: $ ${(this.precio * this.cantidad)}\n`;
     }
     descripcionCarrito(){
         return  `<article>
@@ -26,18 +27,28 @@ class Producto{
                             <img class="fotoCarrito" src= ${this.imagen} alt=" " /></div>
                         <div>
                             <p><strong>${this.nombre}</strong></p>
-                            <p>Precio:   $ ${this.precio}</p>
-                            <p>Cantidad: ${this.cantidad}</p>
-                            <button class="botonEliminar" id="ep-${this.codigo}">
+                            <p><strong>Precio:   $ ${this.precio}</strong></p>
+                        <p><button class="botonEliminar" id="dC-${this.codigo}">
+                            <i class="fi fi-rr-square-minus"></i>
+                        </button>
+                        <strong>Cantidad: ${this.cantidad}</strong>
+                        <button class="botonEliminar" id="aC-${this.codigo}">
+                            <i class="fi fi-rr-square-plus"></i>
+                        </button></p>
+                        <button class="botonEliminar" id="ep-${this.codigo}">
                             <p><strong>Eliminar</strong></p>
-                            </button>
-                            <p>==========================</p>
+                        </button>
+                        <p class="leyendaCarrito"><strong>==========================</strong></p>
                         </div>
                     </div>
                 </article>`
     }
+    disCant(){
+        if(this.cantidad > 1){
+            this.cantidad--
+        }
+    }
 }
-
 class Carrito{
     constructor(){
         this.listaDeCompras = []
@@ -45,87 +56,104 @@ class Carrito{
     agregar(producto){
         this.listaDeCompras.push(producto)
     }
-
+    aumentarCantidad(){
+        if (this.listaDeCompras.length>0){
+            this.listaDeCompras.forEach(producto => {
+                const btn_ac = document.getElementById(`aC-${producto.codigo}`)
+                btn_ac.addEventListener("click", ()=>{
+                    producto.aumCant()
+                    this.guardarEnStorage()
+                    this.mostrarCarrito()
+                })
+            })
+        }
+    }
+    disminuirCantidad(){
+        if (this.listaDeCompras.length>0){
+            this.listaDeCompras.forEach(producto => {
+                const btn_dc = document.getElementById(`dC-${producto.codigo}`)
+                btn_dc.addEventListener("click", ()=>{
+                    producto.disCant()
+                    this.guardarEnStorage()
+                    this.mostrarCarrito()
+                })
+            })
+        }
+    }
+    eliminar(productoAEliminar){
+        let indice = this.listaDeCompras.findIndex(producto => producto.codigo == productoAEliminar.codigo)
+        this.listaDeCompras.splice(indice,1)
+    }
+    eliminarProducto() {
+        this.listaDeCompras.forEach(producto => {
+        const btn_ep = document.getElementById(`ep-${producto.codigo}`)
+        btn_ep.addEventListener("click",()=>{
+            this.eliminar(producto)
+            this.guardarEnStorage()
+            this.mostrarCarrito()
+        })
+    })
+    }
     guardarEnStorage(){
         let listaDeComprasJSON = JSON.stringify(this.listaDeCompras)
         localStorage.setItem("listaDeCompras",listaDeComprasJSON)
     }
-
-/*  El código tiene el siguiente error y desconozco como resolverlo.
-
-    Al recuperar la lista del carrito del local Storage recupera mal las
-    imágenes del producto. 
-
-    Chequeé a traves de console.log que todo había quedado bien almacenado
-    en el local Storage.
-
-    Agradezco las ayudas que me puedas dar para solucionar el problema.
-
-    Desde ya, muchas gracias.
-*/
-
-    recuperarStorage(){
-        let listaDeComprasJSON=localStorage.getItem("listaDeCompras")
-        console.log(listaDeComprasJSON)
-        let listaDeComprasJS=JSON.parse(listaDeComprasJSON)
-        console.log(listaDeComprasJS)
-        let nuevaListaDeCompras =[]
-        listaDeComprasJS.forEach(producto => {
-            let nuevoProducto = new Producto (producto.codigo, producto.categoria, producto.nombre, producto.precio, producto.cantidad, producto.imagen)
-            nuevaListaDeCompras.push(nuevoProducto)
-        })
-        this.listaDeCompras = nuevaListaDeCompras;
-        console.log(this.listaDeCompras[0])
-    }
-
-    mostrar(){
-        let acumuladora_descripcion = ""
-        this.listaDeCompras.forEach( producto => {
-            acumuladora_descripcion = acumuladora_descripcion + producto.descripcionCarrito()
-        })
-        return acumuladora_descripcion
-    }
     mostrarCarrito(){
         let contenedor_carrito = document.getElementById("contenedor_carrito")
         let acumuladora_descripcion = ""
-        this.listaDeCompras.forEach( producto => {
-            acumuladora_descripcion = acumuladora_descripcion + producto.descripcionCarrito()
-        })
-        contenedor_carrito.innerHTML = acumuladora_descripcion + this.valorizarCarrito()
-        contenedor_carrito.className = "contenedorFotoPlantas"
-        this.eliminarProducto()
+        if (this.listaDeCompras.length>0){
+            this.listaDeCompras.forEach( producto => {
+                acumuladora_descripcion = acumuladora_descripcion + producto.descripcionCarrito()
+            })
+            contenedor_carrito.innerHTML = acumuladora_descripcion + this.valorizarCarrito()
+            contenedor_carrito.className = "contenedorFotoPlantas"
+            this.aumentarCantidad()
+            this.disminuirCantidad()
+            this.eliminarProducto()
+            this.vaciarCarrito()
+        } else {
+            contenedor_carrito.innerHTML = `<h3 class="leyendaCarrito"><strong>Sin productos<\strong></h3>`
+            contenedor_carrito.className = "contenedorFotoPlantas"
+        }
         return
+    }
+    recuperarStorage(){
+        let listaDeComprasJSON=localStorage.getItem("listaDeCompras")
+        let listaDeComprasJS=JSON.parse(listaDeComprasJSON)
+        let nuevaListaDeCompras =[]
+        if (listaDeComprasJS){
+            listaDeComprasJS.forEach(prod => {
+                const nuevoProducto = new Producto (prod.codigo,
+                                                    prod.categoria,
+                                                    prod.nombre,
+                                                    prod.precio,
+                                                    prod.cantidad,
+                                                    prod.imagen)
+                nuevaListaDeCompras.push(nuevoProducto)
+            })
+            this.listaDeCompras = nuevaListaDeCompras;
+        }
+    }
+    vaciarCarrito() {
+        const btn_vc = document.getElementById(`vaciarCarrito`)
+            btn_vc.addEventListener("click",()=>{
+                this.vC()
+                this.guardarEnStorage()
+                this.mostrarCarrito()
+            })
     }
     valorizarCarrito(){
         let totalCosto = 0
         this.listaDeCompras.forEach( producto => {
             totalCosto = totalCosto + producto.precio * producto.cantidad
         })
-        lista = `<strong>\nCosto total: $${totalCosto}<\strong>` ;
+        lista = `<p class="leyendaCarrito"><strong>\nCosto total: $${totalCosto}<\strong></p>` ;
         return lista
     }
-    validaExistencia(codigo1){
-        return this.listaDeCompras.some( producto => producto.codigo === codigo1)
-    }
-    encuentraProducto(codigo1){
-        return this.listaDeCompras.find( producto => producto.codigo === codigo1)
-    }
-    eliminar(productoAEliminar){
-            let indice = this.listaDeCompras.findIndex(producto => producto.codigo == productoAEliminar.codigo)
-            this.listaDeCompras.splice(indice,1)
-    }
-    eliminarProducto() {
-        this.listaDeCompras.forEach(producto => {
-            const btn_ep = document.getElementById(`ep-${producto.codigo}`)
-            btn_ep.addEventListener("click",()=>{
-                this.eliminar(producto)
-                this.guardarEnStorage()
-                this.mostrarCarrito()
-            })
-        })
+    vC(){
+        this.listaDeCompras = []
     }
 }
-
 class Exhibidor{
     constructor(){
         this.listaDeProductos = []
@@ -133,21 +161,6 @@ class Exhibidor{
     }
     agregar(producto){
         this.listaDeProductos.push(producto)
-    }
-    mostrar(){
-        let contenedor_productos = document.getElementById("productosAVender")
-        let acumuladora_descripcion = ""
-        console.log(this.filtroDeProductos.length)
-        if (this.filtroDeProductos.length == 0){
-            this.listaDeProductos.forEach( producto => {
-                acumuladora_descripcion = acumuladora_descripcion + producto.descripcion()
-            })
-        } else {
-            this.filtroDeProductos.forEach( producto => {
-                acumuladora_descripcion = acumuladora_descripcion + producto.descripcion()
-            })
-        }
-        return acumuladora_descripcion
     }
     elegirProducto() {
         let contenedor = document.getElementById("productosAVender");
@@ -197,11 +210,24 @@ class Exhibidor{
             gondola.elegirProducto()
         })
     }
-    validaExistencia(codigo1){
-        return this.listaDeProductos.some( producto => producto.codigo === codigo1)
+    filtrarPlantas(){
+        this.filtroDeProductos = this.listaDeProductos.filter((el) => el.categoria == "Plantas")
     }
-    encuentraProducto(codigo1){
-        return this.listaDeProductos.find( producto => producto.codigo === codigo1)
+    filtrarAccesorios(){
+        this.filtroDeProductos = this.listaDeProductos.filter((el) => el.categoria == "Accesorios")
+    }
+    mostrar(){
+        let acumuladora_descripcion = ""
+        if (this.filtroDeProductos.length == 0){
+            this.listaDeProductos.forEach( producto => {
+                acumuladora_descripcion = acumuladora_descripcion + producto.descripcion()
+            })
+        } else {
+            this.filtroDeProductos.forEach( producto => {
+                acumuladora_descripcion = acumuladora_descripcion + producto.descripcion()
+            })
+        }
+        return acumuladora_descripcion
     }
     ordenCodigo(){
         if (this.filtroDeProductos.length == 0){
@@ -231,12 +257,6 @@ class Exhibidor{
             this.filtroDeProductos.sort((a,b)=>a.precio.localeCompare(b.precio));
         }
     }
-    filtrarPlantas(){
-        this.filtroDeProductos = this.listaDeProductos.filter((el) => el.categoria == "Plantas")
-    }
-    filtrarAccesorios(){
-        this.filtroDeProductos = this.listaDeProductos.filter((el) => el.categoria == "Accesorios")
-    }
     quitarFiltro(){
         this.filtroDeProductos.splice(0,this.filtroDeProductos.length)       
     }
@@ -244,11 +264,11 @@ class Exhibidor{
 
 const gondola = new Exhibidor();
 
-const p1 = new Producto("1","Plantas","Sedum maceta 40cm","1200","img/sedum.jpeg");
-const p2 = new Producto("2","Plantas","Madre Perla maceta 40cm","1050","img/madrePerla.jpeg");
-const p3 = new Producto("3","Plantas","Cordón de San José maceta 40cm","1100","img/cordonDeSanJose.jpeg");
-const p4 = new Producto("4","Accesorios","Rollo manguera 1/2 pulg, 25m","9000","img/rolloManguera.jpeg");
-const p5 = new Producto("5","Accesorios","Fertilizante para cesped","3500","img/fertilizante.jpeg");
+const p1 = new Producto("1","Plantas","Sedum maceta 40cm","1200","1","img/sedum.jpeg");
+const p2 = new Producto("2","Plantas","Madre Perla maceta 40cm","1050","1","img/madrePerla.jpeg");
+const p3 = new Producto("3","Plantas","Cordón de San José maceta 40cm","1100","1","img/cordonDeSanJose.jpeg");
+const p4 = new Producto("4","Accesorios","Rollo manguera 1/2 pulg, 25m","9000","1","img/rolloManguera.jpeg");
+const p5 = new Producto("5","Accesorios","Fertilizante para cesped","3500","1","img/fertilizante.jpeg");
 
 gondola.agregar(p1);
 gondola.agregar(p2);
@@ -261,13 +281,5 @@ const carrito = new Carrito();
 lista="";
 
 carrito.recuperarStorage()
-if (carrito.listaDeCompras.length>0) {
-    console.log(carrito.listaDeCompras[0].codigo)
-    console.log(carrito.listaDeCompras[0].categoria)
-    console.log(carrito.listaDeCompras[0].nombre)
-    console.log(carrito.listaDeCompras[0].precio)
-    console.log(carrito.listaDeCompras[0].cantidad)
-    console.log(carrito.listaDeCompras[0].imagen)
-}
 carrito.mostrarCarrito()
 gondola.elegirProducto()
