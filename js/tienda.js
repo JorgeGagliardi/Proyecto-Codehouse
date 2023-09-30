@@ -1,21 +1,24 @@
 // Simulación de una tienda de venta de plantas y accesorios para el jardín
 //
 class Producto{
-    constructor(codigo, categoria, nombre, precio, cantidad, imagen){
+    constructor(codigo, categoria, nombre, precio, cantidad, imagen, alt, detalle){
         this.codigo    = codigo
         this.categoria = categoria
         this.nombre    = nombre
         this.precio    = precio
         this.cantidad  = cantidad
         this.imagen    = imagen
+        this.alt       = alt
+        this.detalle   = detalle
     }
     aumCant(){
         this.cantidad++
     }
     descripcion(){
         return  `<article class="contenedorFotoPlantas_Art">
-        <img class="fotoTienda" src= ${this.imagen} alt=" " />
+        <img class="fotoTienda" src= ${this.imagen} alt=${this.alt} />
         <p>${this.nombre}</p><p>$ ${this.precio}</p>
+        <button class="botonEliminar" id="d-${this.codigo}">+ INFO</button>
         <button class="btn btn-primary" id="ap-${this.codigo}">Añadir al carrito</button>
         <div id="cant-${this.codigo}"></div>
         </article>`
@@ -91,6 +94,7 @@ class Carrito{
             this.eliminar(producto)
             this.guardarEnStorage()
             this.mostrarCarrito()
+            this.cartelProductoEliminado(producto)
         })
     })
     }
@@ -111,6 +115,7 @@ class Carrito{
             this.disminuirCantidad()
             this.eliminarProducto()
             this.vaciarCarrito()
+            this.finalizarCompra()
         } else {
             contenedor_carrito.innerHTML = `<h3 class="leyendaCarrito"><strong>Sin productos<\strong></h3>`
             contenedor_carrito.className = "contenedorFotoPlantas"
@@ -128,7 +133,10 @@ class Carrito{
                                                     prod.nombre,
                                                     prod.precio,
                                                     prod.cantidad,
-                                                    prod.imagen)
+                                                    prod.imagen,
+                                                    prod.alt,
+                                                    prod.detalle
+                                                    )
                 nuevaListaDeCompras.push(nuevoProducto)
             })
             this.listaDeCompras = nuevaListaDeCompras;
@@ -140,7 +148,20 @@ class Carrito{
                 this.vC()
                 this.guardarEnStorage()
                 this.mostrarCarrito()
+                this.cartelCarritoVacio()           })
+    }
+    finalizarCompra() {
+        const btn_vc = document.getElementById(`finalizarCompra`)
+        btn_vc.addEventListener("click",()=>{
+            this.vC()
+            this.guardarEnStorage()
+            this.mostrarCarrito()
+            Swal.fire({
+                title: '¡Compra realizada exitosamente!',
+                icon: 'success',
+                timer: 3000,
             })
+        })
     }
     valorizarCarrito(){
         let totalCosto = 0
@@ -153,6 +174,23 @@ class Carrito{
     vC(){
         this.listaDeCompras = []
     }
+    cartelProductoEliminado(producto){
+        Toastify({
+            text: `Eliminado del carrito ${producto.nombre}`,
+            avatar: `${producto.imagen}`,
+            duration: 3000,
+            gravity: "bottom",
+            position: "right",
+        }).showToast();
+    }
+    cartelCarritoVacio(){
+        Toastify({
+            text: "El carrito está vacío",
+            duration: 3000,
+            gravity: "bottom",
+            position: "right",
+        }).showToast();
+    }
 }
 class Exhibidor{
     constructor(){
@@ -162,18 +200,55 @@ class Exhibidor{
     agregar(producto){
         this.listaDeProductos.push(producto)
     }
+    async preparar(){
+        let listaProductosJSON= await fetch("productosTienda.json")
+        let listaProductosJS= await listaProductosJSON.json();
+        listaProductosJS.forEach(producto => {
+            let nuevoProducto = new Producto(producto.codigo, producto.categoria, producto.nombre, producto.precio, producto.cantidad, producto.imagen, producto.alt, producto.detalle)
+            this.agregar(nuevoProducto)
+        })
+        this.elegirProducto()
+    }
     elegirProducto() {
         let contenedor = document.getElementById("productosAVender");
         contenedor.innerHTML = gondola.mostrar()
         contenedor.className = "contenedorFotoPlantas"
-        this.listaDeProductos.forEach(producto => {
-            const btn_ap = document.getElementById(`ap-${producto.codigo}`)
-            btn_ap.addEventListener("click",()=>{
-                carrito.agregar(producto)
-                carrito.guardarEnStorage()
-                carrito.mostrarCarrito()
+        if (this.filtroDeProductos.length > 0){
+            this.filtroDeProductos.forEach(producto => {
+                const btn_ap = document.getElementById(`ap-${producto.codigo}`)
+                btn_ap.addEventListener("click",()=>{
+                    carrito.agregar(producto)
+                    carrito.guardarEnStorage()
+                    carrito.mostrarCarrito()
+                    this.cartelProductoAgregado(producto)
+                })
             })
-        })
+        } else {
+            this.listaDeProductos.forEach(producto => {
+                const btn_ap = document.getElementById(`ap-${producto.codigo}`)
+                btn_ap.addEventListener("click",()=>{
+                    carrito.agregar(producto)
+                    carrito.guardarEnStorage()
+                    carrito.mostrarCarrito()
+                    this.cartelProductoAgregado(producto)
+                })
+            })
+        }
+        if (this.filtroDeProductos.length > 0){
+                this.filtroDeProductos.forEach(producto => {
+                const btn_d = document.getElementById(`d-${producto.codigo}`)
+                btn_d.addEventListener("click",()=>{
+                    this.cartelProductoDetalle(producto)
+                })
+            })
+        } else {
+            this.listaDeProductos.forEach(producto => {
+                const btn_d = document.getElementById(`d-${producto.codigo}`)
+                btn_d.addEventListener("click",()=>{
+                    this.cartelProductoDetalle(producto)
+                })
+            })
+        }
         const btn_oc = document.getElementById(`ordenCod`)
         btn_oc.addEventListener("click",()=>{
             this.ordenCodigo()
@@ -260,26 +335,31 @@ class Exhibidor{
     quitarFiltro(){
         this.filtroDeProductos.splice(0,this.filtroDeProductos.length)       
     }
+    cartelProductoAgregado(producto){
+        Toastify({
+            text: `Añadido ${producto.nombre}`,
+            avatar: `${producto.imagen}`,
+            duration: 3000,
+            gravity: "bottom",
+            position: "right",
+        }).showToast();
+    }
+    cartelProductoDetalle(producto){
+        Toastify({
+            text: `${producto.detalle}`,
+            //avatar: `${producto.imagen}`,
+            duration: 6000,
+            gravity: "top",
+            position: "right",
+        }).showToast();
+    }
 }
 
 const gondola = new Exhibidor();
-
-const p1 = new Producto("1","Plantas","Sedum maceta 40cm","1200","1","img/sedum.jpeg");
-const p2 = new Producto("2","Plantas","Madre Perla maceta 40cm","1050","1","img/madrePerla.jpeg");
-const p3 = new Producto("3","Plantas","Cordón de San José maceta 40cm","1100","1","img/cordonDeSanJose.jpeg");
-const p4 = new Producto("4","Accesorios","Rollo manguera 1/2 pulg, 25m","9000","1","img/rolloManguera.jpeg");
-const p5 = new Producto("5","Accesorios","Fertilizante para cesped","3500","1","img/fertilizante.jpeg");
-
-gondola.agregar(p1);
-gondola.agregar(p2);
-gondola.agregar(p3);
-gondola.agregar(p4);
-gondola.agregar(p5);
-
 const carrito = new Carrito();
-
 lista="";
 
 carrito.recuperarStorage()
 carrito.mostrarCarrito()
-gondola.elegirProducto()
+
+gondola.preparar()

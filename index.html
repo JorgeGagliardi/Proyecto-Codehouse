@@ -7,9 +7,12 @@
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/bootstrap/bootstrap.css" />
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
-<style>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!--     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.css'>
+ --><style>
 .botonEliminar {
     margin-left: 10px;
+    margin-bottom: 5px;
     color:#006400;
 }
 .contenedorCarrito {
@@ -111,7 +114,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="vaciarCarrito">Vaciar carrito</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Seguir comprando</button>
-                    <button type="button" class="btn btn-primary">Finalizar compra</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="finalizarCompra">Finalizar compra</button>
                 </div>
         </div>
         </div>
@@ -127,5 +130,8 @@
     </footer>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/tienda.js"></script>
-</body>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<!--     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js"></script>
+ --></body>
 </html>
